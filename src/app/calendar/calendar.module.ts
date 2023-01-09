@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DaysComponent } from './days/days.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -9,7 +10,8 @@ import { DaysComponent } from './days/days.component';
     DaysComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatTableModule
   ],
   exports: [
     DaysComponent

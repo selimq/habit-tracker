@@ -1,0 +1,12 @@
+
+.root {
+  margin: auto;
+  flex: auto;
+  padding: 20px 5px 15px 30px;
+  display: inline-block;
+}
+
+.button {
+  text-align: center;
+}
+

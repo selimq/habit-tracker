@@ -1,0 +1,17 @@
+
+<mat-toolbar color="primary">
+
+  <div style="padding-right: 50px;color: rgb(255,255,255);">My Application</div>
+  <div  class="menu"  *ngIf="this.authService.isLoggedIn">
+    <a
+      routerLink="/dashboard">
+      Main
+    </a>
+    <a
+      routerLink="/habits">
+      Habit List
+    </a>
+    <span class="spacer"></span>
+    <button mat-raised-button (click)="logOut()">Log Out</button>
+  </div>
+</mat-toolbar>

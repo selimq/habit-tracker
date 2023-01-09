@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-habit-tracker-be68c": {
+      "hosting": {
+        "habit-tracker": [
+          "angular-habit-tracker-be68c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-habit-tracker-be68c"
+  }
+}
