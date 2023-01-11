@@ -1,41 +1,55 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {CalendarModule} from "./calendar/calendar.module";
 import * as moment from "moment-timezone";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ProductModule} from "./product/product.module";
-import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
-import {provideAuth, getAuth} from '@angular/fire/auth';
-import {provideFirestore, getFirestore} from '@angular/fire/firestore';
-import {provideStorage, getStorage} from '@angular/fire/storage';
+import {getAuth, provideAuth} from '@angular/fire/auth';
+import {getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {getStorage, provideStorage} from '@angular/fire/storage';
 import {FIREBASE_OPTIONS} from "@angular/fire/compat";
-import {BlankPageComponent} from './blank-page/blank-page.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {BlankPageComponent} from './shared/blank-page/blank-page.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {Observable, tap} from "rxjs";
+import {SharedModule} from "./shared/shared.module";
 import {AuthenticationModule} from "./authentication/authentication.module";
 
+//An example for the load data before start
+function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
+  return () => httpClient.get("https://jsonplaceholder.typicode.com/posts/10")
+    .pipe(
+      tap(e => console.log(e))
+    );
+}
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    //PAGES
+    AuthenticationModule,
+    //
+    HttpClientModule,
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    SharedModule,
+    AppRoutingModule,
+  ],
   declarations: [
     AppComponent,
     BlankPageComponent
   ],
-  imports: [
-    BrowserModule,
-    CalendarModule,
-    BrowserAnimationsModule,
-    ProductModule,
-    AuthenticationModule,
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
-    AppRoutingModule
-  ],
   providers: [
-    {provide: FIREBASE_OPTIONS, useValue: environment.firebase}
+    {provide: FIREBASE_OPTIONS, useValue: environment.firebase},
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFactory,
+      deps: [HttpClient],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

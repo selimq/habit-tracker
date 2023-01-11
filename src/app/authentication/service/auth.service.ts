@@ -3,16 +3,19 @@ import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/f
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {User} from "./user";
 import {Router} from "@angular/router";
-import * as moment from "moment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   userData: any;
+  user$: Observable<any>
 
   constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public router: Router) {
-    this.auth.authState.subscribe((user) => {
+    this.user$ = this.auth.authState;
+    this.user$.subscribe((user) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -24,6 +27,7 @@ export class AuthService {
     });
   }
 
+
   setUserData(user: any, name?: string) {
     const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${user.uid}`);
     const userData: User = {
@@ -34,10 +38,11 @@ export class AuthService {
       emailVerified: user.emailVerified,
     };
 
-    void userRef.set({...userData, lastLoginAt:Date()},{
-      merge:true
+    void userRef.set({...userData, lastLoginAt: Date()}, {
+      merge: true
     });
   }
+
   signIn(email: string, password: string): void {
     this.auth.signInWithEmailAndPassword(email, password).then((result) => {
       this.setUserData(result.user);

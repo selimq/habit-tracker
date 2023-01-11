@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {AuthService} from "../../core/services/auth.service";
+import {Component} from '@angular/core';
+import {AuthService} from "../service/auth.service";
 import {FormControl, Validators} from "@angular/forms";
 
 @Component({
@@ -8,14 +8,15 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
-  email =  new FormControl('',[Validators.required, Validators.email]);
-  password =   new FormControl('');
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('');
 
-      constructor(private authService: AuthService) {
+  constructor(private authService: AuthService) {
 
-      }
-      signIn() {
-        console.log(this.email.value, this.password.value)
-        this.authService.signIn(this.email.value!, this.password.value!);
-      }
+  }
+
+  signIn() {
+    console.log(this.email.value, this.password.value)
+    this.authService.signIn(this.email.value!, this.password.value!);
+  }
 }

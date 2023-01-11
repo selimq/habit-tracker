@@ -2,38 +2,31 @@
   <div >
     <div>
       <h3>Sign Up</h3>
-      <div >
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your name</mat-label>
-          <input matInput  id="name"  placeholder="Selim Dogan"  [formControl]="name"  type="text" required>
-          <mat-error *ngIf="name.hasError('required')">
+      <div class="form-group">
+          <label for="name">Enter your name</label>
+          <input class="form-control"  id="name"  placeholder="Selim Dogan"  [formControl]="name"  type="text" required>
+          <div class="invalid-feedback" *ngIf="name.hasError('required')">
             Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
+          </div>
       </div>
-      <div >
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your email</mat-label>
-          <input matInput  id="email"  placeholder="pat@example.com"  [formControl]="email"  type="text" required>
-          <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+      <div>
+        <div class="form-group">
+          <label for="email">Enter your email</label>
+          <input class="form-control" id="email" placeholder="pat@example.com" [formControl]="email" type="text" required>
+          <div class="invalid-feedback" *ngIf="email.hasError('email') && !email.hasError('required')">
             Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="email.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+          </div>
 
+        </div>
       </div>
-      <div >
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
-          <input matInput id="password" [formControl]="password"  type="password"  required>
-        </mat-form-field>
+      <div>
+        <label for="password">Enter your password</label>
+        <input class="form-control" id="password" [formControl]="password" type="password" required>
+      </div>
 
-      </div>
+
       <div class="button">
-        <button mat-raised-button color="primary"  (click)="signUp()">
+        <button type="button" class="btn btn-primary"  (click)="signUp()">
           Sign Up
         </button>
       </div>

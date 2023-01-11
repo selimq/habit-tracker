@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BlankPageComponent } from './blank-page.component';
+import {BlankPageComponent} from './blank-page.component';
 
 describe('BlankPageComponent', () => {
   let component: BlankPageComponent;

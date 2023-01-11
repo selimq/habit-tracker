@@ -1,35 +1,28 @@
 <div class="root">
-  <div >
+  <div>
     <div>
       <h3>Sign In</h3>
-      <div >
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your email</mat-label>
-          <input matInput  id="email"  placeholder="pat@example.com"  [formControl]="email"  type="text" required>
-          <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="email.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-
-      </div>
-      <div >
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
-          <input matInput id="password" [formControl]="password"  type="password"  required>
-        </mat-form-field>
-
-      </div>
-      <div class="button">
-        <button mat-raised-button color="primary"  (click)="signIn()">
-          Log in
-        </button>
+      <div class="form-group">
+        <label for="email">Enter your email</label>
+        <input class="form-control" id="email" placeholder="pat@example.com" [formControl]="email" type="text" required>
+        <div class="invalid-feedback" *ngIf="email.hasError('email') && !email.hasError('required')">
+          Please enter a valid email address
+        </div>
       </div>
     </div>
+
     <div>
-      Don't have an account? <a href="/register-user"> Sign Up</a>
+      <label for="password">Enter your password</label>
+      <input class="form-control" id="password" [formControl]="password" type="password" required>
     </div>
+
+    <div class="button">
+      <button class="btn btn-primary" type="button" (click)="signIn()">
+        Log in
+      </button>
+    </div>
+  </div>
+  <div>
+    Don't have an account? <a href="/register-user"> Sign Up</a>
   </div>
 </div>

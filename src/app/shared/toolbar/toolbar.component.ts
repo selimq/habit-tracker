@@ -1,5 +1,5 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {AuthService} from "../../core/services/auth.service";
+import {Component} from '@angular/core';
+import {AuthService} from "../../authentication/service/auth.service";
 
 @Component({
   selector: 'app-toolbar',
