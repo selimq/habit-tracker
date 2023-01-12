@@ -1,0 +1,13 @@
+<div *ngIf="loading$ | async"  class="spinner-border text-primary " role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div *ngIf="noResults$ | async">
+  No results
+</div>
+<div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor="let habit of habits$ | async | sort  ; trackBy: trackByFn">
+  <div class="card-body row">
+    <h5 class="card-title col-10">{{habit.name}}</h5>
+    <button type="button" class="btn-close" (click)="delete(habit)"> </button>
+
+  </div>
+</div>

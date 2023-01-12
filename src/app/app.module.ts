@@ -15,6 +15,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {SharedModule} from "./shared/shared.module";
 import {AuthenticationModule} from "./authentication/authentication.module";
+import {HabitModule} from "./habit/habit.module";
+import {AuthService} from "./authentication/service/auth.service";
 
 //An example for the load data before start
 function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
@@ -30,6 +32,7 @@ function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
     BrowserAnimationsModule,
     //PAGES
     AuthenticationModule,
+    HabitModule,
     //
     HttpClientModule,
     provideAuth(() => getAuth()),
@@ -48,6 +51,12 @@ function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
       provide: APP_INITIALIZER,
       useFactory: initializeAppFactory,
       deps: [HttpClient],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => () => authService.loadValue(),
+      deps: [AuthService],
       multi: true
     }
   ],

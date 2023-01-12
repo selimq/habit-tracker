@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-habit-page',
+  selector: 'app-view',
   templateUrl: './habit-page.component.html',
   styleUrls: ['./habit-page.component.css']
 })

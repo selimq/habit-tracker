@@ -17,6 +17,6 @@ export class SignUpComponent {
   }
   signUp() {
     console.log(this.email.value, this.password.value)
-    this.authService.signUp(this.email.value!, this.password.value!,this.name.value!);
+    this.authService.signUp(this.email.value!, this.password.value!);
   }
 }

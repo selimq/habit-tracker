@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {User} from "./user";
+import {User} from "../models/user";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 
@@ -13,7 +13,8 @@ export class AuthService {
   userData: any;
   user$: Observable<any>
 
-  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public router: Router) {
+    constructor(public firestore: AngularFirestore, public auth: AngularFireAuth, public router: Router) {
+    console.log("service")
     this.user$ = this.auth.authState;
     this.user$.subscribe((user) => {
       if (user) {
@@ -26,9 +27,24 @@ export class AuthService {
       }
     });
   }
+  loadValue(){
+    return new Promise((resolve) => {
+      this.user$ = this.auth.authState;
+      this.user$.subscribe((user) => {
+        if (user) {
+          this.userData = user;
+          localStorage.setItem('user', JSON.stringify(this.userData));
+          JSON.parse(localStorage.getItem('user')!);
+        } else {
+          localStorage.setItem('user', 'null');
+          JSON.parse(localStorage.getItem('user')!);
+        }
+        resolve(true);
 
+      });
+  });}
 
-  setUserData(user: any, name?: string) {
+  setUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
@@ -55,10 +71,10 @@ export class AuthService {
     }).catch(this.handleError)
   }
 
-  signUp(email: string, password: string, name: string): void {
+  signUp(email: string, password: string): void {
     this.auth.createUserWithEmailAndPassword(email, password).then((result) => {
       this.sendVerificationMail();
-      this.setUserData(result.user, name);
+      this.setUserData(result.user);
     }).catch(this.handleError)
   }
 

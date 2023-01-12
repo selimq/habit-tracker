@@ -1,31 +1,27 @@
-
-
-<nav class="navbar" style="background: lightseagreen">
+<nav class="navbar navbar-expand-md bg-body-tertiary" style="background: teal">
   <div class="container-fluid">
-    <a href="#" class="navbar-brand">Tracker</a>
+    <a class="navbar-brand" href="#">Tracker ✅ </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header" style="background: teal">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Tracker ✅ </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" *ngIf="authService.isLoggedIn">
+        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['']">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['habits']">Habit List</a>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link text-white btn btn-primary" data-bs-dismiss="offcanvas" (click)="logOut()">Log Out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="collapse navbar-collapse" id="navbarNav">
-      <div  class="menu"  *ngIf="this.authService.isLoggedIn">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a
-          routerLink="/dashboard">
-          Main
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          routerLink="/habits">
-          Habit List
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <button type="button" class="btn btn-primary" (click)="logOut()">Log Out</button>
-      </li>
-    </ul>
-  </div>
-  </div>
-
-
 </nav>

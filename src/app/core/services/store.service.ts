@@ -2,8 +2,8 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 
 export abstract class StoreService<T> {
-  state: T;
-  previous: T;
+  state?: T;
+  previous ?: T;
   state$: Observable<T>;
   protected bs: BehaviorSubject<T>;
 
