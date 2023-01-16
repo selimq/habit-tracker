@@ -53,6 +53,11 @@ export class HabitService {
     }))
   }
 
+  update(habit:Partial<Habit>){
+    return this.firestore.update(habit,habit.id!).then(_=> {
+    })
+  }
+
   delete(id: string): void {
     this.store.patch({loading: true, habits: []}, "habit delete");
     this.firestore.delete(id).catch(() => {

@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 })
 export class HabitAddFormComponent {
     form : FormGroup = new FormGroup({
-      name: new FormControl('', [Validators.required,Validators.pattern('^[a-z]+$')])
+      name: new FormControl('', [Validators.required])
     })
 
     status$: Observable<string>;
@@ -24,7 +24,7 @@ export class HabitAddFormComponent {
 
   async submit(){
       this.form.disable();
-      await this.service.create({...this.form.value,createdAt:Date.now()});
+      await this.service.create({...this.form.value,createdAt:Date.now(), days: []});
       this.form.reset();
       this.form.enable();
   }

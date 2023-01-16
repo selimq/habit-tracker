@@ -6,13 +6,14 @@ import {AuthGuard} from "./authentication/guard/auth.guard";
 import {NonAuthGuard} from "./authentication/guard/non-auth.guard";
 import {BlankPageComponent} from "./shared/blank-page/blank-page.component";
 import {HabitPageComponent} from "./habit/view/habit-page.component";
+import {DashboardComponent} from "./dashboard/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
-  /* {
-     path: 'dashboard', component: DaysComponent ,canActivate: [AuthGuard]
+   {
+     path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]
    },
-   */
+
    {
      path:'habits', component:HabitPageComponent, canActivate: [AuthGuard]
    },

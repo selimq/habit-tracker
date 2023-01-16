@@ -17,6 +17,7 @@ import {SharedModule} from "./shared/shared.module";
 import {AuthenticationModule} from "./authentication/authentication.module";
 import {HabitModule} from "./habit/habit.module";
 import {AuthService} from "./authentication/service/auth.service";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 //An example for the load data before start
 function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
@@ -33,6 +34,7 @@ function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
     //PAGES
     AuthenticationModule,
     HabitModule,
+    DashboardModule,
     //
     HttpClientModule,
     provideAuth(() => getAuth()),
