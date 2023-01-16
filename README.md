@@ -4,7 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project was created for track daily habits monthly. 
 
-- [ ] Show days weekly/monthly 
-- [ ] Track habits
-- [ ] Add new habit
+- [x] Show days weekly
+- [ ] Show days monthly
+- [ ] Switch between weeks/months
+- [x] Track habits
+- [x] Add new habit
 - [ ] Show percentage of habits
